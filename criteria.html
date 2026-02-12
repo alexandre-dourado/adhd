@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognição Manual - Guia de Monitoramento</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Ajustes finos para garantir a mesma tipografia e seleção */
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white">
+
+    <!-- Header Estilo Suíço -->
+    <header class="px-6 py-20 border-b-8 border-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div class="max-w-3xl">
+                    <h1 class="text-8xl md:text-[12rem] font-black leading-[0.8] tracking-tighter uppercase mb-8">
+                        Cognição <br/> Manual
+                    </h1>
+                    <p class="text-2xl font-medium max-w-xl leading-tight">
+                        Sistema visual de monitoramento para análise de estados mentais, físicos e eficácia terapêutica.
+                    </p>
+                </div>
+                <div class="hidden md:block text-right">
+                    <p class="text-sm font-bold uppercase tracking-widest mb-2">Protocolo v1.0</p>
+                    <div class="w-16 h-1 bg-black ml-auto"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <!-- O grid será populado via JavaScript para manter a estrutura de dados limpa -->
+        <div id="metrics-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-r border-b border-black">
+            <!-- Cards serão injetados aqui -->
+        </div>
+    </main>
+
+    <!-- Footer / Frase Guia -->
+    <footer class="bg-zinc-100 py-32 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-block bg-black text-white px-4 py-1 text-xs font-bold uppercase tracking-widest mb-8">
+                Conclusão / Frase-Guia
+            </div>
+            <blockquote class="text-4xl md:text-7xl font-bold tracking-tighter leading-none max-w-5xl mx-auto italic">
+                “Melhora terapêutica é quando as coisas ficam menos difíceis sem ficarem mais intensas.”
+            </blockquote>
+            <div class="mt-16 flex justify-center gap-4">
+                <i data-lucide="check-circle-2" class="w-10 h-10 text-black opacity-20"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dados idênticos ao arquivo React original
+        const data = [
+            {
+                title: "Ruído Mental",
+                icon: "brain",
+                definition: "quantidade de pensamentos simultâneos competindo por atenção.",
+                observe: [
+                    "Quantos “assuntos” estão ativos ao mesmo tempo?",
+                    "Você pensa enquanto pensa?",
+                    "Precisa interromper pensamentos para outros entrarem?"
+                ],
+                marking: ["0–1: mente silenciosa ou linear", "2–3: alguns pensamentos paralelos, mas manejáveis", "4–5: múltiplos pensamentos se atropelando"],
+                tip: "ruído mental diminui sem você se sentir acelerado."
+            },
+            {
+                title: "Clareza Mental",
+                icon: "activity",
+                definition: "nitidez cognitiva, não energia.",
+                observe: [
+                    "As ideias se organizam sozinhas?",
+                    "Você entende o que está fazendo sem esforço?",
+                    "Menos confusão interna ao decidir?"
+                ],
+                marking: ["0–1: confusão, névoa", "2–3: entende, mas com esforço", "4–5: entende rápido, sem drama"],
+                tip: "Clareza pode aumentar mesmo com pouco foco."
+            },
+            {
+                title: "Cansaço Físico",
+                icon: "battery",
+                definition: "estado do corpo, não da mente.",
+                observe: ["Peso no corpo", "Lerdeza motora", "Olhos pesados"],
+                marking: ["0–1: corpo leve", "2–3: cansaço tolerável", "4–5: corpo pesado, arrastado"],
+                tip: "Estimulante pode mascarar cansaço físico — observe antes do efeito."
+            },
+            {
+                title: "Euforia",
+                icon: "sun",
+                definition: "elevação artificial de humor/autoestima.",
+                observe: ["Otimismo exagerado", "Sensação de “tudo vai dar certo”", "Vontade de falar muito ou agir rápido"],
+                marking: ["Não: humor neutro", "Leve: um pouco mais animado", "Moderada: empolgação clara", "Intensa: excitação fora do padrão"],
+                tip: "Euforia ≠ melhora terapêutica."
+            },
+            {
+                title: "Ansiedade",
+                icon: "alert-circle",
+                definition: "ativação excessiva + desconforto.",
+                observe: ["Tensão corporal", "Pensamentos antecipatórios", "Sensação de urgência"],
+                marking: ["Não: estado calmo", "Leve: inquietação discreta", "Moderada: incômodo constante", "Intensa: difícil de ignorar"],
+                tip: "Ansiedade geralmente vem com pressa, não com clareza."
+            },
+            {
+                title: "Foco",
+                icon: "target",
+                definition: "capacidade de sustentar atenção sem rigidez.",
+                observe: ["Consegue ficar numa tarefa sem lutar?", "Ou fica hiperfocado, difícil de sair?"],
+                marking: ["Mais contínuo: entra e sai naturalmente", "Mais rígido: fica preso, estreito", "Igual ao habitual: sem mudança"],
+                tip: "Foco terapêutico é flexível, não obsessivo."
+            },
+            {
+                title: "Pico Claro",
+                icon: "zap",
+                definition: "sensação perceptível de início forte do efeito.",
+                observe: ["“bateu”", "mudança corporal clara", "transição abrupta"],
+                marking: ["Sim: houve um momento nítido", "Não: efeito gradual ou imperceptível"],
+                tip: "Tratamento ideal tende a não ter pico claro."
+            },
+            {
+                title: "Irritabilidade",
+                icon: "angry",
+                definition: "redução da tolerância emocional.",
+                observe: ["Sons incomodam mais", "Pessoas irritam sem motivo", "Impaciência"],
+                marking: ["Sim", "Não"],
+                tip: "Geralmente aparece no rebound."
+            },
+            {
+                title: "Queda de Energia",
+                icon: "trending-down",
+                definition: "queda abrupta após o efeito.",
+                observe: ["cansaço súbito", "humor despenca", "vontade de se isolar"],
+                marking: ["Sim", "Não"],
+                tip: "Queda não é sono — é esvaziamento."
+            },
+            {
+                title: "Sono Esperado",
+                icon: "moon",
+                definition: "sua previsão honesta, não desejo.",
+                observe: ["Corpo pede descanso?", "Mente desacelera?", "Histórico de noites após dias parecidos?"],
+                marking: ["Melhor", "Igual", "Pior"],
+                tip: "Isso é prognóstico, não resultado."
+            }
+        ];
+
+        const gridContainer = document.getElementById('metrics-grid');
+
+        // Função para gerar o HTML de cada card
+        data.forEach(item => {
+            const observeList = item.observe.map(obs => `
+                <li class="flex items-start gap-2">
+                    <span class="mt-1.5 w-1 h-1 bg-black rounded-full shrink-0"></span>
+                    ${obs}
+                </li>
+            `).join('');
+
+            const markingList = item.marking ? `
+                <div class="bg-zinc-100 p-4 border-l-4 border-black">
+                    <p class="text-xs uppercase tracking-widest text-zinc-500 font-bold mb-2">Como marcar</p>
+                    <div class="grid grid-cols-1 gap-1 text-sm">
+                        ${item.marking.map(m => `
+                            <div class="flex justify-between border-b border-zinc-200 py-1 last:border-0">
+                                ${m}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
+
+            const tipBlock = item.tip ? `
+                <div class="mt-6 pt-4 border-t border-dashed border-zinc-300">
+                    <p class="text-xs italic text-zinc-600">
+                        <span class="font-bold not-italic">📌 Dica:</span> ${item.tip}
+                    </p>
+                </div>
+            ` : '';
+
+            const cardHTML = `
+                <div class="border-l border-black border-t">
+                    <div class="border-t border-black pt-6 pb-12 flex flex-col h-full group transition-all duration-300 hover:bg-zinc-50 px-4">
+                        <div class="flex items-start justify-between mb-8">
+                            <div class="bg-black p-3 text-white">
+                                <i data-lucide="${item.icon}" width="32" height="32" stroke-width="1.5"></i>
+                            </div>
+                            <span class="text-4xl font-black opacity-10 group-hover:opacity-100 transition-opacity">
+                                ○
+                            </span>
+                        </div>
+                        
+                        <h2 class="text-4xl font-bold uppercase tracking-tighter mb-4 leading-none">
+                            ${item.title}
+                        </h2>
+                        
+                        <div class="space-y-6 flex-grow">
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">O que é</p>
+                                <p class="text-lg leading-tight font-medium">${item.definition}</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">Observe</p>
+                                <ul class="text-sm space-y-1">
+                                    ${observeList}
+                                </ul>
+                            </div>
+
+                            ${markingList}
+                        </div>
+
+                        ${tipBlock}
+                    </div>
+                </div>
+            `;
+            
+            gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+        });
+
+        // Adicionar o bloco "Regra de Ouro" manualmente ao final do grid
+        const goldenRuleHTML = `
+            <div class="border-l border-black border-t bg-black text-white p-8 flex flex-col justify-between min-h-[400px]">
+                <i data-lucide="compass" width="48" height="48" stroke-width="1"></i>
+                <div>
+                    <h3 class="text-xs uppercase tracking-[0.3em] font-bold mb-6 opacity-60">Regra de Ouro</h3>
+                    <p class="text-2xl font-light leading-snug">
+                        Não avalie tudo ao mesmo tempo. 
+                        <br /><br />
+                        O mais importante nos primeiros dias:
+                        <span class="block mt-4 font-bold text-white uppercase text-sm tracking-widest">
+                            Ruído mental • Clareza • Foco • Pico claro
+                        </span>
+                    </p>
+                </div>
+                <div class="text-xs opacity-40">O resto contextualiza.</div>
+            </div>
+        `;
+        gridContainer.insertAdjacentHTML('beforeend', goldenRuleHTML);
+
+        // Inicializar ícones Lucide
+        lucide.createIcons();
+    </script>
+</body>
+</html>
